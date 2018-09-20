@@ -2,13 +2,22 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
+import { userGetters } from './getters'
+import { loginMutations } from './mutations'
+import { loginActions } from './actions'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-
+    // login
+    kakaoAccessToken: null,
+    user_id: null,
+    openLoginPopUp: true,
   },
+  getters: Object.assign({}, userGetters),
+  mutations: Object.assign({}, loginMutations),
+  actions: Object.assign({}, loginActions),
   plugins: [
     createPersistedState({
       storage: {
