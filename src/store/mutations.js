@@ -18,3 +18,9 @@ export const loginMutations = {
     state.openLoginPopUp = true
   }
 }
+
+export const spotMutations = {
+  getChannelSuccess (state, payload) {
+    state.channels = payload
+  }
+}

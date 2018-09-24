@@ -10,3 +10,9 @@ export const userGetters = {
     return state.user_id
   }
 }
+
+export const spotGetters = {
+  getChannelsData (state) {
+    return state.channels
+  }
+}

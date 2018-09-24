@@ -21,3 +21,41 @@ export const loginActions = {
     })
   }
 }
+
+export const channelActions = {
+  registerChannel ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/channel', payload).then(response => {
+      console.log('reponse 들어옴')
+      if (response.data.message === MESSAGE_200) {
+        alert(payload.get('kor_name') + ' 채널이 등록되었습니다.') // 되는지 체크 필요
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  }
+}
+
+export const spotActions = {
+  getChannels ({ commit }) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.defaults.headers['flag'] = 0
+    instance('/channel/list').then(response => {
+      if(response.data.message === MESSAGE_200) {
+        commit('getChannelSuccess', response.data.data)
+      }
+    }).catch(error => {
+      console.log(error.message)
+    })
+  },
+  registerSpot ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/spot', payload).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert(payload.get('name') + ' 스팟이 등록되었습니다.')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  }
+}
