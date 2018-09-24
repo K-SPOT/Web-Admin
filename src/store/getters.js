@@ -16,3 +16,12 @@ export const spotGetters = {
     return state.channels
   }
 }
+
+export const themeGetters = {
+  getThemeId (state) {
+    return state.themeId
+  },
+  getSpotList (state) {
+    return state.spotList
+  }
+}

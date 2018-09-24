@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
-import { userGetters, spotGetters } from './getters'
-import { loginMutations, spotMutations } from './mutations'
-import { loginActions, channelActions, spotActions } from './actions'
+import { userGetters, spotGetters, themeGetters } from './getters'
+import { loginMutations, spotMutations, themeMutations } from './mutations'
+import { loginActions, channelActions, spotActions, themeActions } from './actions'
 
 Vue.use(Vuex)
 
@@ -14,11 +14,15 @@ export const store = new Vuex.Store({
     kakaoAccessToken: null,
     user_id: null,
     openLoginPopUp: true,
-    channels: null
+    // channel
+    channels: null,
+    // theme
+    themeId: null,
+    spotList: []
   },
-  getters: Object.assign({}, userGetters, spotGetters),
-  mutations: Object.assign({}, loginMutations, spotMutations),
-  actions: Object.assign({}, loginActions, channelActions, spotActions),
+  getters: Object.assign({}, userGetters, spotGetters, themeGetters),
+  mutations: Object.assign({}, loginMutations, spotMutations, themeMutations),
+  actions: Object.assign({}, loginActions, channelActions, spotActions, themeActions),
   plugins: [
     createPersistedState({
       storage: {

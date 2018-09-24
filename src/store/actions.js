@@ -40,7 +40,7 @@ export const spotActions = {
   getChannels ({ commit }) {
     axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
     instance.defaults.headers['flag'] = 0
-    instance('/channel/list').then(response => {
+    instance.get('/channel/list').then(response => {
       if(response.data.message === MESSAGE_200) {
         commit('getChannelSuccess', response.data.data)
       }
@@ -53,6 +53,40 @@ export const spotActions = {
     instance.post('/spot', payload).then(response => {
       if(response.data.message === MESSAGE_200) {
         alert(payload.get('name') + ' 스팟이 등록되었습니다.')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  }
+}
+
+export const themeActions = {
+  registerTheme ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/theme', payload).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        commit('registerThemeSuccess', response.data.data)
+        alert(payload.title + ' 테마가 등록되었습니다.')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  getSpotList ({ commit }) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.get('/spot/list').then(response => {
+      if(response.data.message === MESSAGE_200) {
+        commit('spotListSuccess', response.data.data)
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  registerContents ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/theme/contents', payload).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert(payload.get('title') + ' 컨텐츠가 테마에 등록되었습니다.')
       }
     }).catch(error => {
       alert(error.message)

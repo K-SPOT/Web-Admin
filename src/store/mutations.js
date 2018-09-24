@@ -24,3 +24,12 @@ export const spotMutations = {
     state.channels = payload
   }
 }
+
+export const themeMutations = {
+  registerThemeSuccess (state, payload) {
+    state.themeId = payload.theme_id
+  },
+  spotListSuccess (state, payload) {
+    state.spotList = payload
+  }
+}
