@@ -21,21 +21,30 @@
       </v-flex>
       <v-flex xs2></v-flex>
       <v-flex xs5>
-        <h2>main_img 메인에서 보여지는 이미지(텍스트 포함)</h2>
-        <div class="dropbox" v-if="!main_img">
+        <h3>main_img_kor 메인에서 보여지는 이미지(텍스트 포함)</h3>
+        <div class="dropbox" v-if="!main_img_kor">
           <input class="input-image" type="file" :multiple="false" @change="onFileChanged($event, 0)" accept="image/*">
           <p>Drag your image</p>
         </div>
-        <img :src="main_img" v-if="main_img" alt="main_img">
+        <img :src="main_img_kor" v-if="main_img_kor" alt="main_img_kor">
       </v-flex>
       <v-flex xs5 offset-xs2>
+        <h3>main_img_eng 메인에서 보여지는 이미지(텍스트 포함)</h3>
+        <div class="dropbox" v-if="!main_img_eng">
+          <input class="input-image" type="file" :multiple="false" @change="onFileChanged($event, 1)" accept="image/*">
+          <p>Drag your image</p>
+        </div>
+        <img :src="main_img_eng" v-if="main_img_eng" alt="main_img_eng">
+      </v-flex>
+      <v-flex xs5 offset-xs3>
         <h2>img 테마 들어가면 보여지는 배경이미지</h2>
         <div class="dropbox" v-if="!img">
-          <input class="input-image" type="file" :multiple="false" @change="onFileChanged($event, 1)" accept="image/*">
+          <input class="input-image" type="file" :multiple="false" @change="onFileChanged($event, 2)" accept="image/*">
           <p>Drag your image</p>
         </div>
         <img :src="img" v-if="img" alt="img">
       </v-flex>
+      <v-flex xs4></v-flex>
       <v-flex xs2 offset-xs5>
         <v-btn large color="primary" @click="register">등록하기</v-btn>
       </v-flex>
@@ -111,9 +120,11 @@ export default {
     return {
       title: null,
       subtitle: null,
-      main_file: null,
+      main_kor_file: null,
+      main_eng_file: null,
       img_file: null,
-      main_img: null,
+      main_img_kor: null,
+      main_img_eng: null,
       img: null,
       selected_spotId: null,
       contents_title: null,
@@ -131,7 +142,9 @@ export default {
     onFileChanged (event, idx) {
       if(event.target.files[0]['type'].split('/')[0] === 'image') {
         if(idx === 0)
-          this.main_file = event.target.files[0]
+          this.main_kor_file = event.target.files[0]
+        else if(idx === 1)
+          this.main_eng_file = event.target.files[0]
         else
           this.img_file = event.target.files[0]
         this.getImage(event.target.files[0], idx)
@@ -144,7 +157,9 @@ export default {
       fileReader.onload = () => {
         console.log(fileReader)
         if(idx === 0)
-          this.main_img = fileReader.result
+          this.main_img_kor = fileReader.result
+        else if(idx === 1)
+          this.main_img_eng = fileReader.result
         else
           this.img = fileReader.result
       }
@@ -154,7 +169,8 @@ export default {
       let data = new FormData()
       data.append('title', this.title)
       data.append('subtitle', this.subtitle)
-      data.append('main_img', this.main_file)
+      data.append('main_img_kor', this.main_kor_file)
+      data.append('main_img_eng', this.main_eng_file)
       data.append('img', this.img_file)
 
       this.$store.dispatch('registerTheme', data)
