@@ -8,6 +8,8 @@
         <v-btn flat to="/">Channel</v-btn>
         <v-btn flat to="/spot">Spot</v-btn>
         <v-btn flat to="/theme">Theme</v-btn>
+        <v-btn flat to="/updateChannel">채널 수정</v-btn>
+        <v-btn flat to="/deleteSpot">spot 삭제</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <login v-if="loginPopUp"></login>

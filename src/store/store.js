@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
-import { userGetters, spotGetters, themeGetters } from './getters'
-import { loginMutations, spotMutations, themeMutations } from './mutations'
+import { userGetters, spotGetters, themeGetters, channelGetters } from './getters'
+import { loginMutations, spotMutations, themeMutations, channelMutations } from './mutations'
 import { loginActions, channelActions, spotActions, themeActions } from './actions'
 
 Vue.use(Vuex)
@@ -16,12 +16,13 @@ export const store = new Vuex.Store({
     openLoginPopUp: true,
     // channel
     channels: null,
+    channel_edit: null,
     // theme
     themeId: null,
     spotList: []
   },
-  getters: Object.assign({}, userGetters, spotGetters, themeGetters),
-  mutations: Object.assign({}, loginMutations, spotMutations, themeMutations),
+  getters: Object.assign({}, userGetters, spotGetters, themeGetters, channelGetters),
+  mutations: Object.assign({}, loginMutations, spotMutations, themeMutations, channelMutations),
   actions: Object.assign({}, loginActions, channelActions, spotActions, themeActions),
   plugins: [
     createPersistedState({

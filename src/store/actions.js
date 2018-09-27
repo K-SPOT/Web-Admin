@@ -33,6 +33,38 @@ export const channelActions = {
     }).catch(error => {
       alert(error.message)
     })
+  },
+  deleteChannel ({ commit }, channel_id) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.delete(`/channel/${channel_id}`).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert('선택하신 채널이 성공적으로 삭제되었습니다.')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  editChannel ({ commit }, channel_id) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.get(`/channel/${channel_id}/edit`).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        commit('getEditChannelSuccess', response.data.data)
+        alert('채널 정보 불러오기 성공')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  updateChannel ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/channel/edit', payload).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert(payload.get('kor_name') + ' 채널이 성공적으로 수정되었습니다.')
+        location.reload()
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
   }
 }
 
@@ -53,6 +85,16 @@ export const spotActions = {
     instance.post('/spot', payload).then(response => {
       if(response.data.message === MESSAGE_200) {
         alert(payload.get('name') + ' 스팟이 등록되었습니다.')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  deleteSpot ({ commit }, spot_id) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.delete(`/spot/${spot_id}`).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert('선택하신 채널이 성공적으로 삭제되었습니다.')
       }
     }).catch(error => {
       alert(error.message)

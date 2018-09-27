@@ -33,3 +33,9 @@ export const themeMutations = {
     state.spotList = payload
   }
 }
+
+export const channelMutations = {
+  getEditChannelSuccess (state, payload) {
+    state.channel_edit = payload
+  }
+}

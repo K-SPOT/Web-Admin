@@ -25,3 +25,9 @@ export const themeGetters = {
     return state.spotList
   }
 }
+
+export const channelGetters = {
+  getChannelEdit (state) {
+    return state.channel_edit
+  }
+}
