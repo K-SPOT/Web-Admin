@@ -99,6 +99,28 @@ export const spotActions = {
     }).catch(error => {
       alert(error.message)
     })
+  },
+  editSpot ({ commit }, spot_id) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.get(`/spot/${spot_id}/AllInfo`).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        commit('getEditSpotSuccess', response.data.data)
+        alert('채널 정보 불러오기 성공')
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
+  },
+  updateSpot ({ commit }, payload) {
+    axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
+    instance.post('/spot/edit', payload).then(response => {
+      if(response.data.message === MESSAGE_200) {
+        alert(payload.name + ' 스팟이 성공적으로 수정되었습니다.')
+        location.reload()
+      }
+    }).catch(error => {
+      alert(error.message)
+    })
   }
 }
 

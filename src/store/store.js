@@ -19,7 +19,9 @@ export const store = new Vuex.Store({
     channel_edit: null,
     // theme
     themeId: null,
-    spotList: []
+    spotList: [],
+    // spot
+    spot_edit: null
   },
   getters: Object.assign({}, userGetters, spotGetters, themeGetters, channelGetters),
   mutations: Object.assign({}, loginMutations, spotMutations, themeMutations, channelMutations),

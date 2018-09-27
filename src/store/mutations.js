@@ -22,6 +22,9 @@ export const loginMutations = {
 export const spotMutations = {
   getChannelSuccess (state, payload) {
     state.channels = payload
+  },
+  getEditSpotSuccess (state, payload) {
+    state.spot_edit = payload
   }
 }
 

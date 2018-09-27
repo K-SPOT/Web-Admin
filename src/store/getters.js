@@ -14,6 +14,9 @@ export const userGetters = {
 export const spotGetters = {
   getChannelsData (state) {
     return state.channels
+  },
+  getSpotEdit (state) {
+    return state.spot_edit
   }
 }
 
