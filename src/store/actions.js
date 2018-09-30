@@ -130,7 +130,7 @@ export const themeActions = {
     instance.post('/theme', payload).then(response => {
       if(response.data.message === MESSAGE_200) {
         commit('registerThemeSuccess', response.data.data)
-        alert(payload.title + ' 테마가 등록되었습니다.')
+        alert(payload.get('title') + ' 테마가 등록되었습니다.')
       }
     }).catch(error => {
       alert(error.message)
@@ -150,7 +150,7 @@ export const themeActions = {
     axios.defaults.headers['authorization'] = localStorage.getItem(tokenKey)
     instance.post('/theme/contents', payload).then(response => {
       if(response.data.message === MESSAGE_200) {
-        alert(payload.get('title') + ' 컨텐츠가 테마에 등록되었습니다.')
+        alert(payload.title + ' 컨텐츠가 테마에 등록되었습니다.')
       }
     }).catch(error => {
       alert(error.message)
